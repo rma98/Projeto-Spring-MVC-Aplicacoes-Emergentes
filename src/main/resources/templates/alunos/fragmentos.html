@@ -1,35 +1,52 @@
 <div class="container mt-4" th:fragment="form(aluno, action)">
-         <div class="row">  
+    <div class="row">
         <form class="was-validated" th:object="${aluno}" th:action="${action}" method="POST">
             <div class="mb-3">
                 <label for="validationCustom01" class="form-label">Nome do Aluno</label>
-                <input class="form-control is-invalid" type="text"  name="nome" id="validationCustom01" 
-                th:field="*{nome}"
-                required>
-                <div class="invalid-feedback" >
-                  O campo nome é obrigatório.
+                <input class="form-control" 
+                       type="text"  
+                       name="nome" 
+                       id="validationCustom01" 
+                       th:field="*{nome}"
+                       th:classappend="${#fields.hasErrors('nome') ? 'is-invalid' : ''}"
+                       required>
+                <div class="invalid-feedback">
+                    O campo nome Ã© obrigatÃ³rio.
                 </div>
             </div>
+
             <div class="mb-3">
-                <label class="form-label">Endereço</label>
-                <input class="form-control" type="text" name="endereco" th:field="*{endereco}">
+                <label class="form-label">EndereÃ§o</label>
+                <input class="form-control" 
+                       type="text" 
+                       name="endereco" 
+                       th:field="*{endereco}">
                 <div class="invalid-feedback"></div>
             </div>
-			   <div class="mb-3">
+
+            <div class="mb-3">
                 <label class="form-label">Cidade</label>
-                <input class="form-control" type="text" name="cidade" th:field="*{cidade}">
+                <input class="form-control" 
+                       type="text" 
+                       name="cidade" 
+                       th:field="*{cidade}">
                 <div class="invalid-feedback"></div>
             </div>
+
             <div class="mb-3">
                 <label class="form-label">UF</label>
-                  <!---->  <select class="form-select" name="uf" th:field="*{uf}">
+                <select class="form-select" 
+                        name="uf" 
+                        th:field="*{uf}">
                     <option th:each="uf : ${UnidadeFederacao}"
-                            th:value="${uf.sigla}" th:text="${uf.nome} "></option>
+                            th:value="${uf.sigla}" 
+                            th:text="${uf.nome}"></option>
                 </select> 
-                <div></div>
+                <div class="invalid-feedback"></div>
             </div>
+
             <button class="btn btn-primary" type="submit">Submeter</button>
             <a href="javascript:history.back()">Voltar</a>
         </form>
-       </div>
-    </div>   
+    </div>
+</div>

@@ -1,39 +1,44 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: head('Editar Aluno')"></head>
+<body>
 
- <head th:replace="~{fraguimentos :: head('Edit aluno #')}"></head>
+    <div th:replace="fragments/layout.html :: header('Editar Aluno')"></div>
 
-  <body>
-   <header th:replace="~{fraguimentos :: header('Edit aluno #' + ${alunoID})}"></header>
+    <div th:fragment="conteudo">
+        <h1>Editar Aluno</h1>
+        <form th:action="@{/alunos/edit/{id}(id=${aluno.id})}" th:object="${aluno}" method="POST" class="was-validated">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome do Aluno</label>
+                <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+                <div class="invalid-feedback">
+                    O campo nome é obrigatório.
+                </div>
+            </div>
 
-<div th:replace="~{alunos/fragmentos :: form(aluno, '/alunos/' + ${alunoID})}"></div>
+            <div class="mb-3">
+                <label for="endereco" class="form-label">Endereço</label>
+                <input type="text" id="endereco" th:field="*{endereco}" class="form-control">
+            </div>
 
+            <div class="mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" id="cidade" th:field="*{cidade}" class="form-control">
+            </div>
 
+            <div class="mb-3">
+                <label for="uf" class="form-label">UF</label>
+                <select id="uf" th:field="*{uf}" class="form-select">
+                    <option th:each="uf : ${UnidadeFederacao}" th:value="${uf.sigla}" th:text="${uf.nome}"></option>
+                </select>
+            </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" 
-    crossorigin="anonymous"></script>
-     <script type="text/javascript">
- // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-      'use strict'
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+        </form>
+    </div>
 
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.querySelectorAll('.needs-validation')
+    <div th:replace="fragments/layout.html :: footer"></div>
 
-      // Loop over them and prevent submission
-      Array.prototype.slice.call(forms)
-        .forEach(function (form) {
-          form.addEventListener('submit', function (event) {
-            if (!form.checkValidity()) {
-              event.preventDefault()
-              event.stopPropagation()
-            }
-
-            form.classList.add('was-validated')
-          }, false)
-        })
-    })()
-    </script>
-  </body>
-</html> 
+</body>
+</html>

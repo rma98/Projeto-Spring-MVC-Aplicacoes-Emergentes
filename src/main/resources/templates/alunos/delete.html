@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: head('Excluir Aluno')"></head>
+<body>
+
+    <div th:replace="fragments/layout.html :: header"></div>
+
+    <div th:fragment="conteudo">
+        <h1>Excluir Aluno</h1>
+        <p>Tem certeza de que deseja excluir o aluno <strong th:text="${aluno.nome}">Nome do Aluno</strong>?</p>
+
+        <form th:action="@{/alunos/delete/{id}(id=${aluno.id})}" method="POST">
+            <button type="submit" class="btn btn-danger">Excluir</button>
+            <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <div th:replace="fragments/layout.html :: footer"></div>
+
+</body>
+</html>

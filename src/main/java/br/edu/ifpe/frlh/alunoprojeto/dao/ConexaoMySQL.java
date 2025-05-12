@@ -9,7 +9,7 @@ public class ConexaoMySQL {
 	public static Connection getConexaoMySQL() throws SQLException, ClassNotFoundException {
 		Connection connection = null; 
 		Class.forName("com.mysql.jdbc.Driver");	
-		connection = DriverManager.getConnection("jdbc:mysql://localhost/projeto_bd_aluno","root","");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost/projeto_bd_aluno","root","root");
 		return connection;
 	}
 }
